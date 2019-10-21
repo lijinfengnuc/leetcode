@@ -21,17 +21,21 @@ public class MaxArea_11 {
         System.out.println(solution.maxArea(array));
     }
 
-    /** 问题可以分解为如下
-     *  maxArea[n] = max(area[0,n],area[1,n]...area[n-1,n],maxArea[n-1])
-     *  需要数组保存maxArea*/
     public int maxArea(int[] height) {
-        int maxArea = Math.min(height[0], height[1]);
-        for(int i = 2; i < height.length; i++) {
-            for(int j =0; j < i; j++) {
-                maxArea = Math.max(Math.min(height[j], height[i]) * (i-j), maxArea);
+        int max=0,v=0,i=0,j=height.length-1;
+        while(i<j){
+            if(height[i]<height[j]){
+                v=height[i]*(j-i);
+                i++;
             }
+            else {
+                v=height[j]*(j-i);
+                j--;
+            }
+            if(v>max)
+                max=v;
         }
-        return maxArea;
+        return max;
     }
 
 
