@@ -18,13 +18,13 @@ import java.util.Arrays;
 public class ThreeSumClosest_16 {
 
     public static void main(String[] args) {
-        int[] array = {-1,-2,0,1,2,3};
+        int[] array = {-3,-2,-5,3,-4};
         ThreeSumClosest_16 solution = new ThreeSumClosest_16();
-        System.out.println(solution.threeSumClosest(array, 1));
+        System.out.println(solution.threeSumClosest(array, -1));
     }
 
     public int threeSumClosest(int[] nums, int target) {
-        int result = Integer.MAX_VALUE;
+        int result = 0;
         if(nums.length < 3) {
             return result;
         }
@@ -38,9 +38,9 @@ public class ThreeSumClosest_16 {
             while(left < right) {
                 int sum = nums[left] + nums[right];
                 if(sum == currentTarget) {
-                    return 0;
+                    return target;
                 }else{
-                    if(Math.abs(result) > Math.abs(currentTarget - sum)) {
+                    if((i == 0 && result == 0) || (Math.abs(result-target) > Math.abs(currentTarget - sum))) {
                         result = sum + nums[i];
                     }
                     if(sum < currentTarget) {
