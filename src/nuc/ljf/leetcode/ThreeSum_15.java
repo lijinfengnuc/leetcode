@@ -25,7 +25,7 @@ public class ThreeSum_15 {
 
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList();
-        if(nums.length < 3) {
+        if(nums == null || nums.length < 3) {
             return result;
         }
         Arrays.sort(nums);
@@ -33,23 +33,18 @@ public class ThreeSum_15 {
         if(nums[0] > 0 || nums[length-1] < 0) {
             return result;
         }
-        int left, right, target;
-        for(int i = 0; i < length && nums[i] < 1; i++) {
-            if(i > 0 && nums[i] == nums[i-1]) {
-                // 重复数字，跳过
+        int left, right, currentTarget;
+        for(int i = 0; i < length - 2 && nums[i] + nums[i+1] + nums[i+2] <= 0; i++) {
+            if((i > 0 && nums[i] == nums[i-1]) || nums[i] + nums[length-1] + nums[length-2] < 0) {
                 continue;
             }
             left = i + 1;
             right = nums.length - 1;
-            target = 0 - nums[i];
+            currentTarget = 0 - nums[i];
             while(left < right) {
                 int sum = nums[left] + nums[right];
-                if(sum == target){
-                    List<Integer> list = new ArrayList<>();
-                    list.add(nums[i]);
-                    list.add(nums[left]);
-                    list.add(nums[right]);
-                    result.add(list);
+                if(sum == currentTarget){
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
                     while(left < right && nums[left] == nums[left+1]) {
                         left++;
                     }
@@ -58,7 +53,7 @@ public class ThreeSum_15 {
                     }
                     left++;
                     right--;
-                }else if(sum < target){
+                }else if(sum < currentTarget){
                     left++;
                 }else{
                     right--;
