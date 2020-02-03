@@ -17,17 +17,17 @@ import java.util.*;
 
 public class IsValid_20 {
 
-    public static void main(String[] args) {
-        IsValid_20 solution = new IsValid_20();
-        System.out.println(solution.isValid("()"));
-    }
-
     private static Map<Character, Character> map = new HashMap<>();
 
     static{
         map.put(')', '(');
         map.put(']', '[');
         map.put('}', '{');
+    }
+
+    public static void main(String[] args) {
+        IsValid_20 solution = new IsValid_20();
+        System.out.println(solution.isValid("()"));
     }
 
     public boolean isValid(String s) {
