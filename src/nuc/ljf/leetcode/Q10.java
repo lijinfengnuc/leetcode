@@ -34,20 +34,31 @@ public class Q10 {
         char[] sChars = s.toCharArray();
         char[] pChars = p.toCharArray();
         /*dp[i][j]表示s[0,i]与p[0,j]匹配*/
-        boolean[][] dp = new boolean[sLen][pLen];
+        boolean[][] dp = new boolean[sLen+1][pLen+1];
         if(sChars[0] != pChars[0] && pChars[0] != '.') {
             return false;
         }
-        dp[0][0] = true;
-        for(int i=0; i < sLen; i++) {
-            for(int j=0; j < pLen; j++) {
-                if(!dp[i][j]) {
-                    continue;
+        dp[1][1] = true;
+        for(int i=0; i < sLen + 1; i++) {
+            for(int j=0; j < pLen + 1; j++) {
+                if(i == 0 || j == 0) {
+                    dp[i][j] = true;
                 }
-                if(dp[sLen-1][pLen-1]) {
-                    return true;
+                if(dp[i-1][j-1]) {
+                    if(sChars[i+1] == pChars[j+1]) {
+                        dp[i][j] = true;
+                        continue;
+                    }
+                    if(pChars[j+1] == '.') {
+                        dp[i][j] = true;
+                        continue;
+                    }
+                    if(sChars[i+1] == pChars[j-1] && pChars[j] == '*')
+
                 }
-                if(sChars[i+1] == pChars[j+1] || pChars[j+1] == '.' || (sChars[i+1] == pChars[j] && pChars[j] == '*') ) {
+
+
+                if(sChars[i+1] == pChars[j+1] || pChars[j+1] == '.' || (sChars[i+1] == pChars[j-1] && pChars[j] == '*')) {
                     dp[i+1][j+1] = true;
                 }
                 if(j > 0 && (sChars[i+1] == pChars[j-1] && pChars[j] == '*')) {
