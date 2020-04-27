@@ -16,8 +16,8 @@ package nuc.ljf.leetcode;
 public class Q5 {
 
     public static void main(String[] args) {
-        Q5 solution = new Q5();
-        System.out.println(solution.longestPalindrome("aab"));
+        Q5 q = new Q5();
+        System.out.println(q.longestPalindrome("aab"));
     }
 
     public String longestPalindrome(String s) {
