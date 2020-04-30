@@ -23,7 +23,7 @@ public class Q62 {
         if(m==1 || n==1){
             return 1;
         }
-        //dp[i][j]表示从开始到(m,n)的位置一共有多少条路径
+        //dp[i][j]表示从(0,0)到(i,j)一共有多少条路径
         int[][] dp = new int[m][n];
         for(int i=0; i<m; i++) {
             for(int j=0; j<n; j++) {
