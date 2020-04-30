@@ -13,31 +13,29 @@ package nuc.ljf.leetcode;
  * @since JDK1.8
  */
 
-public class MaxArea_11 {
+public class Q11 {
 
     public static void main(String[] args) {
-        MaxArea_11 solution = new MaxArea_11();
+        Q11 solution = new Q11();
         int[] array = {1,8,6,2,5,4,8,3,7};
         System.out.println(solution.maxArea(array));
     }
 
     public int maxArea(int[] height) {
-        int max=0,v=0,i=0,j=height.length-1;
-        while(i<j){
-            if(height[i]<height[j]){
-                v=height[i]*(j-i);
+        int max = 0;
+        int currentArea = 0;
+        //双指针分别从头尾向中间靠拢，直至相逢
+        for(int i=0,j=height.length-1; i<j;) {
+            if(height[i] < height[j]) {
+                currentArea = height[i]*(j-i);
                 i++;
-            }
-            else {
-                v=height[j]*(j-i);
+            }else {
+                currentArea = height[j]*(j-i);
                 j--;
             }
-            if(v>max)
-                max=v;
+            max = Math.max(max, currentArea);
         }
         return max;
     }
-
-
 
 }
