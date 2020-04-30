@@ -20,7 +20,34 @@ public class Q44 {
     }
 
     public boolean isMatch(String s, String p) {
-        return true;
+        if(p.isEmpty()) {
+            return s.isEmpty();
+        }
+        char[] sChars = s.toCharArray();
+        char[] pChars = p.toCharArray();
+        int sLen = sChars.length;
+        int pLen = pChars.length;
+        //dp[i][j]表示s[0,i]与p[0,j]是否匹配
+        boolean[][] dp = new boolean[sLen+1][pLen+1];
+        dp[0][0] = true;
+        for(int i=0; i<sLen+1; i++) {
+            for(int j=1; j<pLen+1; j++) {
+                if(pChars[j-1] == '*') {
+                    //0个
+                    dp[i][j] = dp[i][j-1];
+                    if(!dp[i][j] && i>0) {
+                        //1个或者多个
+                        dp[i][j] = dp[i-1][j-1] || dp[i-1][j];
+                    }
+                }else {
+                    //1个
+                    if(i>0 && (sChars[i-1]==pChars[j-1] || pChars[j-1] == '?')) {
+                        dp[i][j] = dp[i-1][j-1];
+                    }
+                }
+            }
+        }
+        return dp[sLen][pLen];
     }
 
 }
